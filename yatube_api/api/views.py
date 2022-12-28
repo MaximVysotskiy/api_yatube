@@ -3,7 +3,6 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from posts.models import Comment, Group, Post
-
 from .permissions import AuthorPermission
 from .serializers import CommentSerializer, GroupSerializer, PostSerializer
 
@@ -25,7 +24,6 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated, AuthorPermission,)
-
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
         new_queryset = Comment.objects.filter(post=post_id)
