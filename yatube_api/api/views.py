@@ -24,6 +24,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated, AuthorPermission,)
+
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
         new_queryset = Comment.objects.filter(post=post_id)
